@@ -3,7 +3,50 @@
 
 """Local search system prompts."""
 
+
+
+
 LOCAL_SEARCH_SYSTEM_PROMPT = """
+In the end of your response provide direct answer in this format:
+[your direct answer to the question]
+Direct answer must be concrete and must not contain alternatives, descriptions or reasoning. Direct answer should contain only one name or fact or location etc.
+
+Context:
+{context_data}
+
+Add 'FINISHED' to the end of your response when you are done. Use only this information to answer the question. If there is no answer in the context, state: 'no answer in the context'
+"""
+
+PREV_LOCAL_SEARCH_SYSTEM_PROMPT = """
+
+In the end of your response provide direct answer in this format:
+[your direct answer to the question]
+Direct answer must be concrete and must not contain alternatives, descriptions or reasoning. Direct answer should contain only one name or fact or location etc.
+
+
+---Role---
+
+You are a helpful assistant responding to questions about data in the tables provided. 
+
+
+---Target response length and format---
+Answer in one sentence. 
+Direct answer: your direct answer to the question
+Direct answer must be concrete and must not contain alternatives, descriptions or reasoning. Direct answer should contain only one name or fact or location etc
+
+
+---Data tables---
+
+{context_data}
+"""
+
+
+
+
+
+
+
+PREV_LOCAL_SEARCH_SYSTEM_PROMPT = """
 ---Role---
 
 You are a helpful assistant responding to questions about data in the tables provided.
@@ -66,4 +109,9 @@ Do not include information where the supporting evidence for it is not provided.
 {response_type}
 
 Add sections and commentary to the response as appropriate for the length and format. Style the response in markdown.
+
+In the end provide direct answer in this format:
+
+Direct answer: your direct answer to the question
+Direct answer must be concrete and must not contain alternatives, descriptions or reasoning. Direct answer should contain only one name or fact or location etc
 """

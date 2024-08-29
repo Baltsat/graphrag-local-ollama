@@ -59,7 +59,7 @@ if __name__ == "__main__":
         "--response_type",
         help="Free form text describing the response type and format, can be anything, e.g. Multiple Paragraphs, Single Paragraph, Single Sentence, List of 3-7 Points, Single Page, Multi-Page Report",
         type=str,
-        default="Multiple Paragraphs",
+        default="Single Sentence",
     )
 
     parser.add_argument(

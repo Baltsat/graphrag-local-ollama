@@ -37,7 +37,8 @@ class LocalSearch(BaseSearch):
         context_builder: LocalContextBuilder,
         token_encoder: tiktoken.Encoding | None = None,
         system_prompt: str = LOCAL_SEARCH_SYSTEM_PROMPT,
-        response_type: str = "multiple paragraphs",
+        # response_type: str = "multiple paragraphs",
+        response_type: str = "single paragraph",
         callbacks: list[BaseLLMCallback] | None = None,
         llm_params: dict[str, Any] = DEFAULT_LLM_PARAMS,
         context_builder_params: dict | None = None,
@@ -74,11 +75,13 @@ class LocalSearch(BaseSearch):
             search_prompt = self.system_prompt.format(
                 context_data=context_text, response_type=self.response_type
             )
+            instructions = """Provide direct answer. Direct answer must be concrete and must not contain alternatives, descriptions or reasoning. Direct answer should contain only one name or fact or location etc
+"""
             search_messages = [
                 {"role": "system", "content": search_prompt},
-                {"role": "user", "content": query},
+                {"role": "user", "content": query + instructions},
             ]
-
+       
             response = await self.llm.agenerate(
                 messages=search_messages,
                 streaming=True,
